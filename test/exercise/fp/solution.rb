@@ -20,7 +20,9 @@ module Exercise
       end
 
       def chars_count(_films, _threshold)
-        0
+        _films.select{ |f| f["rating_kinopoisk"].to_f >= _threshold }
+              .map{ |f| f["name"].scan(/и/).length }
+              .reduce(:+)
       end
     end
   end
