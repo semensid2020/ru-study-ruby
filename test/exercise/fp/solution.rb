@@ -12,15 +12,15 @@ module Exercise
         record["rating_kinopoisk"].to_f.positive? && countries_number(record) > 1
       end
 
-      def rating(_array)
-        ratings_filtered = _array.select{ |f| accounted_in_rating?(f) }
+      def rating(array)
+        ratings_filtered = array.select{ |f| accounted_in_rating?(f) }
                                  .map{ |f| f["rating_kinopoisk"].to_f }
 
         ratings_filtered.reduce(:+) / ratings_filtered.size
       end
 
-      def chars_count(_films, _threshold)
-        _films.select{ |f| f["rating_kinopoisk"].to_f >= _threshold }
+      def chars_count(films, threshold)
+        films.select{ |f| f["rating_kinopoisk"].to_f >= threshold }
               .map{ |f| f["name"].count('и') }
               .reduce(:+)
       end
