@@ -15,15 +15,15 @@ module Exercise
       end
 
       def search(array, query, left = 0, right = array.size - 1)
-        if right >= left
-          half_index = left + (right - left) / 2
-          return half_index if array[half_index] == query
+        return -1 if left > right || array[left] > query || array[right] < query
+        return left if array[left] == query
+        return right if array[right] == query
 
-          return search(array, query, left, half_index - 1) if array[half_index] > query
+        half_index = left + (right - left) / 2
+        return half_index if array[half_index] == query
 
-          return search(array, query, half_index + 1, right)
-        end
-        -1
+        return search(array, query, left, half_index - 1) if array[half_index] > query
+        search(array, query, half_index + 1, right)
       end
     end
   end
